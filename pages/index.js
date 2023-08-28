@@ -1,83 +1,158 @@
-import { useState } from "react";
-import copy from "copy-to-clipboard";
+import React, { useState } from 'react';
 
-const Index = () => {
-  const [videoURL, setVideoURL] = useState("");
-  const [thumbnailOptions, setThumbnailOptions] = useState([]);
+export default function Home() {
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [age, setAge] = useState(null);
 
-  const getYouTubeThumbnail = (url) => {
-    let regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
-    let match = url.match(regExp);
+  const calculateExactAge = (day, month, year) => {
+    const today = new Date();
+    const birthDate = new Date(year, month - 1, day);
+    
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
 
-    if (match && match[1].length === 11) {
-      const videoURL = match[1];
-      const thumbnailBaseUrl = "http://img.youtube.com/vi/";
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
 
-      const options = [
-        { resolution: "HD (1280x720)", code: "maxresdefault" },
-        { resolution: "SD (640x480)", code: "sddefault" },
-        { resolution: "Normal (480x360)", code: "hqdefault" },
-        { resolution: "Medium (320x180)", code: "mqdefault" },
-        { resolution: "Low (120x90)", code: "default" },
-      ];
+    const months = monthDiff < 0 ? 12 + monthDiff : monthDiff;
+    const days = dayDiff < 0 ? new Date(today.getFullYear(), today.getMonth(), 0).getDate() + dayDiff : dayDiff;
 
-      const thumbnailOptions = options.map((option) => ({
-        resolution: option.resolution,
-        url: `${thumbnailBaseUrl}${videoURL}/${option.code}.jpg`,
-      }));
+    return {
+      years: age,
+      months: months,
+      days: days,
+    };
+  };
 
-      setThumbnailOptions(thumbnailOptions);
-      setVideoURL("");
-    } else {
-      setThumbnailOptions([]);
+  const handleSubmit = () => {
+    if (day && month && year) {
+      const exactAge = calculateExactAge(day, month, year);
+      setAge(exactAge);
     }
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-          Youtube Thumbnail Downloader
-        </h1>
-        <p className="text-gray-600">
-          Download high-quality thumbnails from YouTube videos.
-        </p>
-      </header>
-      <div className="text-center">
-        <input
-          type="text"
-          className="w-full md:w-1/2 px-4 py-2 border rounded"
-          placeholder="Enter YouTube URL"
-          value={videoURL}
-          onChange={(e) => setVideoURL(e.target.value)}
-        />
-        <button
-          className="btn-blue mt-2"
-          onClick={() => getYouTubeThumbnail(videoURL)}
-        >
-          Download Thumbnails
-        </button>
-      </div>
-      {thumbnailOptions.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Thumbnail Options</h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {thumbnailOptions.map((option, index) => (
-              <div key={index} className="thumbnail-option">
-                <img src={option.url} alt={`Thumbnail ${index + 1}`} />
-                <button
-                  className="btn-blue mt-2"
-                  onClick={() => copy(option.url)}
-                >
-                  Copy Image URL
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+    <div style={{ padding: '50px', textAlign: 'center' }}>
+      <div className="container">
+      <h1>Age Calculator</h1>
+      <p>
+      Exacte Age Calculator accurately calculates your exact age and gives the answer of How old are you ?
+      </p>
+      
+      <div className="ageCalculatorBox">
+      <h2>Enter your birth date to calculate your exact age.</h2>
+      <div className="dateInputs">
+          <select 
+              value={day}
+              onChange={(e) => setDay(e.target.value)}
+          >
+              <option value="">Day</option>
+              {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                  <option key={d} value={d}>{d}</option>
+              ))}
+          </select>
 
-export default Index;
+          <select 
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
+          >
+              <option value="">Month</option>
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                  <option key={m} value={m}>{m}</option>
+              ))}
+          </select>
+
+          <input 
+              placeholder="YYYY"
+              maxLength="4"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+          />
+          </div>
+          </div>
+      </div>
+
+      <button className="btn-blue"
+       onClick={handleSubmit}>Calculate Age</button>
+      {age && (
+        <h2>
+          You are {age.years} years, {age.months} months, and {age.days} days old.
+        </h2>
+      )}
+      <div className="home-container">
+      <div className="content">
+    
+      <h1>Why Do You Need the Exact Age Calculator?</h1>
+      <p>In our digital age, there are countless reasons one might need to know their exact age:</p>
+      <ul>
+        <li>Precise age requirement submissions for online forms or applications</li>
+        <li>Personal curiosity to know your age down to the day</li>
+        <li>Fun comparisons among friends and family members</li>
+      </ul>
+      <p>Whatever the reason, our Age Calculator provides an accurate and fast solution.</p>
+
+      <h1>How Does Our Age Calculator Work?</h1>
+      <p>To provide the most accurate results, our calculator considers not just the year but the exact day and month of your birth. It even accounts for those years when February has an extra day!</p>
+      <h1>Steps to Calculate Your Exact Age:</h1>
+      <ol>
+        <li>Visit our Age Calculator platform.</li>
+        <li>Select your date of birth using the dropdowns provided.</li>
+        <li>Hit the "Calculate Age" button and voila! Your age in years, months, and days will appear instantly.</li>
+      </ol>
+      <h1>Why Our Age Calculator Stands Out</h1>
+      
+      <div className="feature">
+        <h2>User-Friendly Interface</h2>
+        <p>With an intuitive design, our platform is accessible for users of all ages.</p>
+      </div>
+      <div className="feature">
+        <h2>Accurate and Fast</h2>
+        <p>Our algorithm ensures that you get the most precise age calculation almost instantly.</p>
+      </div>
+      <div className="feature">
+        <h2>Mobile Optimized</h2>
+        <p>Whether you’re on desktop or mobile, our site is optimized for a seamless experience.</p>
+      </div>
+      
+
+      <h1>Wrapping Up</h1>
+      <p>
+        In today's fast-paced digital world, having tools that are both efficient and precise is a must. Our Exact Age Calculator is just one such tool, promising a user-friendly experience that gives you accurate results in seconds. So, the next time a friend or a form asks for your exact age, you’ll know where to look!
+      </p>
+    <style jsx>{`
+        p {
+          border-bottom: 1px solid #d1d1d1;
+          padding-bottom: 15px;
+          line-height: 1.5;
+          margin-bottom: 15px;
+        }
+
+        p:last-child {
+          border-bottom: none;
+      
+        }
+        li {
+          margin-bottom: 10px;
+        }
+        ul {
+          margin-left: 20px;
+          line-height: 1.5;
+          margin-bottom: 20px;
+          color: #444;
+        }
+        .feature {
+          margin-bottom: 20px;
+        
+      `}</style>
+  </div>
+    </div>
+</div>
+    
+  );
+  
+}
+
