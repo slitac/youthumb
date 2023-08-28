@@ -3,7 +3,7 @@
 /* Set the base font and background color for the entire app */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7fafc;
+  background-color: #e3ebf1f3;
 }
 
 /* Center align the content in the container */
@@ -12,68 +12,117 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 1vh;
 }
 
-/* Style the input and button for the YouTube URL */
-input[type="text"] {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
+/* Title */
+h1 {
+  font-size: 24px;
+  color: #bd0c0c;
+  margin-bottom: 20px;
+}
+
+
+/* Date Input */
+input[type="date"] {
+  padding: 10px;
+  border: 1px solid #21b621;
+  border-radius: 5px;
+  width: 30%;
+  box-sizing: border-box;
 }
 
 /* Add some spacing between input and button */
 input[type="text"] + button {
-  margin-top: 0.5rem;
+  margin-top: 1cm;
+}
+/* Calculate Button */
+.btn-blue {
+  display: inline-block;
+  padding: 20px 30px;
+  margin-top: 20px;
+  background-color: #99a5e5;
+  border: none;
+  border-radius: 5px;
+  color: #070707;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s;
 }
 
-/* Style the "Download Thumbnails" button */
-.btn-blue {
-  background-color: #3498db;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
 
 .btn-blue:hover {
-  background-color: #2680c5;
+  background-color: #26c541;
 }
 
-/* Style the thumbnail options */
-.thumbnail-option {
-  background-color: white;
-  border: 1px solid #ccc;
+/* Margin Top utility */
+.mt-2 {
+  margin-top: 20px;
+}
+
+/* Result Text */
+p {
+  font-size: 18px;
+  margin-top: 30px;
+  color: #444;
+}
+
+
+
+.dateInputContainer {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 50px;
+    text-align: center;
+}
+
+.ageCalculatorBox {
+  border: 2px solid #accdf7;
+  padding: 20px;
+  border-radius: 2px;
+  margin: 20px 0;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #99a5e5;
+  box-shadow: 0 0 5px rgba(211, 0, 7, 7.1);
+}
+
+
+
+.dateInputs {
+  display: flex;
+  gap: 10px;
+}
+
+.dateInputs select,
+.dateInputs input {
+  padding: 5px 10px;
+  border: 1Opx solid #e0e0e0;
   border-radius: 4px;
-  padding: 1rem;
-  text-align: center;
-  transition: box-shadow 0.2s;
+  font-size: 20px;
 }
 
-.thumbnail-option:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.dateInputs input {
+  width: 80px; /* Adjust as needed */
 }
 
-/* Style the images within thumbnail options */
-.thumbnail-option img {
-  max-width: 100%;
-  height: auto;
+
+.dayInput, .monthInput {
+  width: 60px;  /* Width for day and month inputs */
 }
 
-/* Style the "Copy Image URL" button */
-.thumbnail-option button {
-  background-color: #3498db;
-  color: white;
-  font-weight: bold;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.yearInput {
+  width: 60px;  /* Width for year input */
 }
 
-.thumbnail-option button:hover {
-  background-color: #2680c5;
+
+.home-container {
+  max-width: 600px;  /* Adjust this value to your preference */
+  margin: 0 auto;   /* This will center the content */
+  padding: 20px;
 }
