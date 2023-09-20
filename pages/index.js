@@ -44,7 +44,7 @@ export default function Home() {
       </p>
       
       <div className="ageCalculatorBox">
-      <h2>Enter your birth date to calculate your exact agee.</h2>
+      <h2>Enter your birth date to calculate your exact age.</h2>
       <div className="dateInputs">
           <select 
               value={day}
