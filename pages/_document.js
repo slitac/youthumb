@@ -29,6 +29,16 @@ class MyDocument extends Document {
 
 <script type="text/javascript" src="https://zcode15.me/?ze=gnqwmztggy5ha3ddf42dqmrv" async></script>
 
+       <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8FV6LTK6TS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8FV6LTK6TS');
+</script>
+
         </Head>
         <body>
           <Main />
